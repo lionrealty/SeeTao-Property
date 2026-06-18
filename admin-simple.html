@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion Realty - Simple Property Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+<div class="max-w-5xl mx-auto p-8">
+    <h1 class="text-4xl font-bold text-center mb-10">Lion Realty - Property Manager</h1>
+    
+    <div class="bg-white p-8 rounded-3xl shadow-xl">
+        <table class="w-full" id="propertyTable">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="p-4 text-left">Image URL</th>
+                    <th class="p-4 text-left">Price</th>
+                    <th class="p-4 text-left">Title</th>
+                    <th class="p-4 text-left">Description</th>
+                    <th class="p-4">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody" class="text-sm"></tbody>
+        </table>
+
+        <button onclick="addRow()" 
+                class="mt-6 bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700">
+            + Add New Property
+        </button>
+
+        <button onclick="generateHTML()" 
+                class="mt-6 ml-4 bg-blue-600 text-white px-8 py-3 rounded-2xl hover:bg-blue-700">
+            生成代码 → 复制到 properties.html
+        </button>
+    </div>
+
+    <pre id="result" class="mt-10 bg-gray-900 text-green-300 p-6 rounded-2xl text-xs overflow-auto hidden"></pre>
+</div>
+
+<script>
+// 默认数据（你可以修改）
+let data = [
+    {img: "./images/OIP.jpg", price: "RM 7,200,000", title: "3 Storey Semi-D @ Semenyih", desc: "Freehold • 14,000 sqft Built-Up • 17,000 sqft Land"},
+];
+
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    
+    data.forEach((item, i) => {
+        tbody.innerHTML += `
+            <tr class="border-b">
+                <td class="p-3"><input type="text" value="${item.img}" class="w-full border p-2 rounded" onchange="updateData(${i}, 'img', this.value)"></td>
+                <td class="p-3"><input type="text" value="${item.price}" class="w-full border p-2 rounded" onchange="updateData(${i}, 'price', this.value)"></td>
+                <td class="p-3"><input type="text" value="${item.title}" class="w-full border p-2 rounded" onchange="updateData(${i}, 'title', this.value)"></td>
+                <td class="p-3"><input type="text" value="${item.desc}" class="w-full border p-2 rounded" onchange="updateData(${i}, 'desc', this.value)"></td>
+                <td class="p-3 text-center">
+                    <button onclick="deleteRow(${i})" class="text-red-600 hover:text-red-700">Delete</button>
+                </td>
+            </tr>`;
+    });
+}
+
+function updateData(i, field, value) {
+    data[i][field] = value;
+}
+
+function addRow() {
+    data.push({img: "./images/OIP.jpg", price: "RM 0", title: "New Property", desc: "Description"});
+    renderTable();
+}
+
+function deleteRow(i) {
+    if (confirm("Delete this row?")) {
+        data.splice(i, 1);
+        renderTable();
+    }
+}
+
+function generateHTML() {
+    let html = `<div class="grid md:grid-cols-3 gap-8">\n`;
+    
+    data.forEach(item => {
+        html += `
+    <!-- ${item.title} -->
+    <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
+        <img src="${item.img}" alt="${item.title}" class="w-full h-72 object-cover">
+        <div class="p-8">
+            <div class="flex justify-between items-center mb-4">
+                <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
+                <span class="text-2xl font-bold">${item.price}</span>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3">${item.title}</h3>
+            <p class="text-gray-600 mb-6">${item.desc}</p>
+            <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
+        </div>
+    </div>\n`;
+    });
+    
+    html += `</div>`;
+    
+    document.getElementById('result').classList.remove('hidden');
+    document.getElementById('result').textContent = html;
+    
+    navigator.clipboard.writeText(html);
+    alert("✅ Code has been copied! Paste it into properties.html");
+}
+
+renderTable();
+</script>
+</body>
+</html>
