@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: lionrealty/SeeTao-Property   # ← 改成你的 GitHub 用户名 + 仓库名
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "properties"
+    label: "Properties"
+    folder: "_properties"
+    create: true
+    slug: "{{fields.title}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Price", name: "price", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Link", name: "link", widget: "string"}
