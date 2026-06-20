@@ -50,21 +50,38 @@
 <body class="font-sans text-gray-900">
 
     <!-- Navbar -->
-    <nav class="bg-[#1840B2] shadow-lg fixed w-full z-50 h-[90px]">
-<a href="index.html" class="flex items-center">
-        <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
-	    <div class="flex justify-end items-center">
-	    <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
-             </div>
-</a>
-            <div class="hidden md:flex items-center gap-24 text-lg">
-                <a href="#home" class="nav-link font-medium text-white hover:text-[#F97E2B]">Home</a>
-		<a href="properties.html" class="nav-link font-medium text-white hover:text-[#F97E2B]">Properties</a>
-		<a href="#why" class="nav-link font-medium text-white hover:text-[#F97E2B]">Why Us</a>
-		<a href="#contact" class="nav-link font-medium text-white hover:text-[#F97E2B]">Contact Us</a>
-            </div>
+<nav class="bg-[#1840B2] shadow-lg fixed w-full z-50">
+    <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center h-[90px]">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center">
+            <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10 text-lg">
+            <a href="#home" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Home</a>
+            <a href="properties.html" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Properties</a>
+            <a href="#why" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Why Us</a>
+            <a href="#contact" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Contact Us</a>
         </div>
-    </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden text-white text-3xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#1840B2] border-t border-blue-800 py-6">
+        <div class="px-6 flex flex-col gap-6 text-lg">
+            <a href="#home" class="text-white hover:text-[#F97E2B] transition">Home</a>
+            <a href="properties.html" class="text-white hover:text-[#F97E2B] transition">Properties</a>
+            <a href="#why" class="text-white hover:text-[#F97E2B] transition">Why Us</a>
+            <a href="#contact" class="text-white hover:text-[#F97E2B] transition">Contact Us</a>
+        </div>
+    </div>
+</nav>
 
     <!-- Hero Section -->
 <section id="home" class="hero-bg h-screen flex items-center text-white">
@@ -294,8 +311,26 @@
     </footer>
 
    <script>
+	   
     document.addEventListener('DOMContentLoaded', function() {
-        
+        // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            
+            const icon = menuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
         // Smooth scrolling (保持不变)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
