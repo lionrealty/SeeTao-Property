@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore all available properties from Lion Realty Malaysia. Luxury homes, semi-D, bungalows, and apartments in Selangor, Kuala Lumpur, and Penang.">
+    <meta name="description" content="Explore all available properties from SeeTao Property Malaysia.">
     <title>All Properties - SeeTao Property</title>
-    
+   
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+   
     <style>
         .property-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -22,42 +22,64 @@
             background-size: cover;
             background-position: center;
         }
+        .category-title {
+            border-bottom: 4px solid;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-900">
 
     <!-- Navbar -->
-    <nav class="bg-[#1840B2] shadow-lg fixed w-full z-50 h-[90px]">
-<a href="index.html" class="flex items-center">
-        <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
-	    <div class="flex justify-end items-center">
-	    <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
-             </div>
-</a>
-            <div class="hidden md:flex items-center gap-24 text-lg">
-                <a href="index.html" class="nav-link font-medium text-white hover:text-[#F97E2B]">Home</a>
-		<a href="properties.html" class="nav-link font-medium text-white hover:text-[#F97E2B]">Properties</a>
-		<a href="index.html/#why" class="nav-link font-medium text-white hover:text-[#F97E2B]">Why Us</a>
-		<a href="index.html/#contact" class="nav-link font-medium text-white hover:text-[#F97E2B]">Contact Us</a>
+    <nav class="bg-[#1840B2] shadow-lg fixed w-full z-50">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center h-[90px]">
+            <a href="index.html" class="flex items-center">
+                <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-10 text-lg">
+                <a href="index.html" class="font-medium text-white hover:text-[#F97E2B]">Home</a>
+                <a href="properties.html" class="font-medium text-white hover:text-[#F97E2B]">Properties</a>
+                <a href="index.html#why" class="font-medium text-white hover:text-[#F97E2B]">Why Us</a>
+                <a href="index.html#contact" class="font-medium text-white hover:text-[#F97E2B]">Contact Us</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-3xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1840B2] border-t border-blue-800 py-6">
+            <div class="px-6 flex flex-col gap-6 text-lg">
+                <a href="index.html" class="text-white">Home</a>
+                <a href="properties.html" class="text-white">Properties</a>
+                <a href="index.html#why" class="text-white">Why Us</a>
+                <a href="index.html#contact" class="text-white">Contact Us</a>
             </div>
         </div>
     </nav>
 
-
     <!-- Small Hero -->
-    <section class="hero-small h-[600px] flex items-center text-white">
+    <section class="hero-small h-[500px] flex items-center text-white pt-20">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h1 class="text-5xl md:text-6xl font-bold">All Properties</h1>
-            <p class="text-xl mt-4 text-gray-200">Discover our latest property listings across Malaysia</p>
+            <p class="text-xl mt-4 text-gray-200">Discover our latest listings in Malaysia</p>
         </div>
     </section>
 
-    <!-- Properties Grid - 12 Properties -->
+    <!-- Properties Content -->
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
 
-                <!-- Property 1 -->
+            <!-- For Sale -->
+            <div id="sale" class="mb-20">
+                <h2 class="category-title text-4xl font-bold mb-10 inline-block border-blue-600 text-blue-700">For Sale</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Property 1,2,3,4... 可以继续添加 -->
+                    <div class="property-card bg-white rounded-3xl overflow-hidden shadow"> ... </div>
+                     <!-- Property 1 -->
                 <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
                     <img src="./images/OIP.jpg" alt="Semenyih Semi-D" class="w-full h-72 object-cover">
                     <div class="p-8">
@@ -71,161 +93,46 @@
                     </div>
                 </div>
 
-                <!-- Property 2 -->
+					 <!-- Property 2 -->
                 <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/133/600/400" alt="Shah Alam Bungalow" class="w-full h-72 object-cover">
+                    <img src="./images/OIP.jpg" alt="Semenyih Semi-D" class="w-full h-72 object-cover">
                     <div class="p-8">
                         <div class="flex justify-between items-center mb-4">
                             <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 3,280,000</span>
+                            <span class="text-2xl font-bold text">RM 7,200,000</span>
                         </div>
-                        <h3 class="text-2xl font-semibold mb-3">Modern Bungalow - Shah Alam</h3>
-                        <p class="text-gray-600 mb-6">5 Bedrooms • Private Pool & Garden</p>
-                        <a href="property-shah-alam.html" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
+                        <h3 class="text-2xl font-semibold mb-3">3 Storey Semi-D @ Semenyih</h3>
+                        <p class="text-gray-600 mb-6">Freehold • 14,000 sqft • Land 17,000 sqft</p>
+                        <a href="property-1.html" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
                     </div>
                 </div>
-
-                <!-- Property 3 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/201/600/400" alt="Penang Sea View" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 1,150,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Sea View Apartment - Penang</h3>
-                        <p class="text-gray-600 mb-6">2 Bedrooms • Infinity Pool</p>
-                        <a href="property-penang.html" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
                 </div>
-
-                <!-- Property 4 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/1015/600/400" alt="KLCC Condo" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 2,150,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Luxury Condo @ KLCC</h3>
-                        <p class="text-gray-600 mb-6">3 Bedrooms • City View • KLCC</p>
-                        <a href="property-klcc.html" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 5 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/237/600/400" alt="Mont Kiara" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 1,850,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Modern Condo - Mont Kiara</h3>
-                        <p class="text-gray-600 mb-6">4 Bedrooms • 2 Bathrooms • Near MRT</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 6 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/180/600/400" alt="Damansara" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 4,500,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Double Storey Terrace - Damansara</h3>
-                        <p class="text-gray-600 mb-6">4 Bedrooms • Renovated • Good Location</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 7 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/251/600/400" alt="Cyberjaya" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 980,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Service Apartment - Cyberjaya</h3>
-                        <p class="text-gray-600 mb-6">2 Bedrooms • Near University</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 8 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/133/600/400" alt="Subang Jaya" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 2,680,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">2 Storey Terrace - Subang Jaya</h3>
-                        <p class="text-gray-600 mb-6">4 Bedrooms • Near Sunway</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 9 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/201/600/400" alt="Penang" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 1,480,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Condo with Sea View - Penang</h3>
-                        <p class="text-gray-600 mb-6">3 Bedrooms • Investment Ready</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 10 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/1015/600/400" alt="KL Eco City" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 2,950,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Luxury Condo - KL Eco City</h3>
-                        <p class="text-gray-600 mb-6">4 Bedrooms • High Floor</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 11 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/180/600/400" alt="Puchong" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 1,680,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Townhouse - Puchong</h3>
-                        <p class="text-gray-600 mb-6">4 Bedrooms • Gated Community</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Property 12 -->
-                <div class="property-card bg-white rounded-3xl overflow-hidden shadow">
-                    <img src="https://picsum.photos/id/251/600/400" alt="Bangi" class="w-full h-72 object-cover">
-                    <div class="p-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-                            <span class="text-2xl font-bold">RM 890,000</span>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-3">Apartment - Bangi</h3>
-                        <p class="text-gray-600 mb-6">3 Bedrooms • Near UKM</p>
-                        <a href="#" class="block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- For Rent -->
+            <div id="rent" class="mb-20">
+                <h2 class="category-title text-4xl font-bold mb-10 inline-block border-green-600 text-green-700">For Rent</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 放 For Rent 的房产 -->
+                </div>
+            </div>
+
+            <!-- New Projects -->
+            <div id="project" class="mb-20">
+                <h2 class="category-title text-4xl font-bold mb-10 inline-block border-purple-600 text-purple-700">New Projects</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 放 New Project 的房产 -->
+                </div>
+            </div>
+
+            <!-- Land -->
+            <div id="land" class="mb-20">
+                <h2 class="category-title text-4xl font-bold mb-10 inline-block border-amber-600 text-amber-700">Land</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 放 Land 的房产 -->
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -241,10 +148,21 @@
                     <img src="./images/iproperty-logo.png" alt="iProperty Logo" class="h-9 w-auto hover:opacity-80">
                 </a>
             </div>
-            <p class="text-gray-500 mt-12">Copyright © 2026 GAP ESTATE BALAKONG. All rights reserved. 
-</p>
+            <p class="text-gray-500 mt-12">Copyright © 2026 GAP ESTATE BALAKONG. All rights reserved.</p>
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
 </body>
 </html>
