@@ -70,54 +70,165 @@
     </section>
 
     <!-- Properties Content -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <!-- For Sale -->
+        <div id="sale" class="mb-20">
+            <h2 class="category-title text-4xl font-bold mb-10 inline-block border-blue-600 text-blue-700">For Sale</h2>
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Card 1 -->
+                <div class="property-card flex flex-col h-full bg-[#FCF7F2] rounded-3xl overflow-hidden shadow-sm border border-[#EADCC9]">
+                    <img src="./images/62de29d8-41cf-4865-821d-35258a30a78e.jpg" alt="Semenyih Semi-D" class="w-full h-72 object-cover">
+                    <div class="p-8 flex flex-col flex-1">
+                        <!-- Tag -->
+                        <div class="mb-4">
+                            <span class="bg-[#1A4D2E] text-white px-5 py-1.5 rounded-full text-sm font-semibold tracking-wide">For Sale</span>
+                        </div>
+                        <!-- Title -->
+                        <h3 class="text-2xl font-bold text-[#4A3B32] mb-1">3 Storey Semi-D</h3>
+                        <!-- Location -->
+                        <div class="flex items-center text-[#998475] text-sm mb-6">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Cheras, Selangor
+                        </div>
+                        
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-2 border-t border-b border-[#EADCC9] py-3 my-2 text-sm text-[#7A685A]">
+                            <div class="border-r border-[#EADCC9] pr-2">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Price</span>
+                                <span class="font-bold text-[#4A3B32] text-base">RM 11,500,000</span>
+                            </div>
+                            <div class="pl-4">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Type</span>
+                                <span class="font-bold text-[#4A3B32] text-base">Semi-D</span>
+                            </div>
+                        </div>
 
-            <!-- For Sale -->
-            <div id="sale" class="mb-20">
-                <h2 class="category-title text-4xl font-bold mb-10 inline-block border-blue-600 text-blue-700">For Sale</h2>
-               <div class="grid md:grid-cols-3 gap-8 items-stretch">
-  <div class="property-card flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow">
-    <img src="./images/62de29d8-41cf-4865-821d-35258a30a78e.jpg" alt="Semenyih Semi-D" class="w-full h-72 object-cover">
-    <div class="p-8 flex flex-col flex-1">
-      <div class="flex justify-between items-center mb-4">
-        <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-        <span class="text-2xl font-bold">RM 11,500,000</span>
-      </div>
-      <h3 class="text-2xl font-semibold mb-3 min-h-[3.5rem]">3 Storey Semi-D @ Cheras</h3>
-      <p class="text-gray-600 mb-6 flex-1">Worthy Investment · Modern façade · Strategic Location</p>
-      <a href="property-1.html" class="mt-auto block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-    </div>
-  </div>
+                        <!-- Features List -->
+                        <div class="space-y-2.5 my-6 text-[#7A685A] text-sm flex-1">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Worthy Investment</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Modern façade</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Strategic Location</span>
+                            </div>
+                        </div>
 
-  <div class="property-card flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow">
-    <img src="./images/property2.png" alt="Semenyih Bungalow" class="w-full h-72 object-cover">
-    <div class="p-8 flex flex-col flex-1">
-      <div class="flex justify-between items-center mb-4">
-        <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-        <span class="text-2xl font-bold">RM 9,800,000</span>
-      </div>
-      <h3 class="text-2xl font-semibold mb-3 min-h-[3.5rem]">1.5 Storey Semi-D @ Semenyih</h3>
-      <p class="text-gray-600 mb-6 flex-1">Ample Power Supply · Strategically located · High Ceiling</p>
-      <a href="property-2.html" class="mt-auto block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-    </div>
-  </div>
+                        <!-- Button -->
+                        <div class="mt-auto pt-4 text-center">
+                            <a href="property-1.html" class="inline-block bg-[#9E8265] text-white px-10 py-3 rounded-full hover:bg-[#856C53] transition text-sm font-bold uppercase tracking-wider shadow-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="property-card flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow">
-    <img src="./images/property3.png" alt="Semenyih Bungalow" class="w-full h-72 object-cover">
-    <div class="p-8 flex flex-col flex-1">
-      <div class="flex justify-between items-center mb-4">
-        <span class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium">For Sale</span>
-        <span class="text-2xl font-bold">RM 9,800,000</span>
-      </div>
-      <h3 class="text-2xl font-semibold mb-3 min-h-[3.5rem]">1.5 Storey Semi-D @ Semenyih</h3>
-      <p class="text-gray-600 mb-6 flex-1"> </p>
-      <a href="property-3.html" class="mt-auto block w-full bg-blue-700 text-white py-4 rounded-2xl hover:bg-blue-800 transition text-center font-medium">View Details</a>
-    </div>
-  </div>
-</div>
-			 
-            
+                <!-- Card 2 -->
+                <div class="property-card flex flex-col h-full bg-[#FCF7F2] rounded-3xl overflow-hidden shadow-sm border border-[#EADCC9]">
+                    <img src="./images/property2.png" alt="Semenyih Bungalow" class="w-full h-72 object-cover">
+                    <div class="p-8 flex flex-col flex-1">
+                        <!-- Tag -->
+                        <div class="mb-4">
+                            <span class="bg-[#1A4D2E] text-white px-5 py-1.5 rounded-full text-sm font-semibold tracking-wide">For Sale</span>
+                        </div>
+                        <!-- Title -->
+                        <h3 class="text-2xl font-bold text-[#4A3B32] mb-1">1.5 Storey Semi-D</h3>
+                        <!-- Location -->
+                        <div class="flex items-center text-[#998475] text-sm mb-6">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Semenyih, Selangor
+                        </div>
+                        
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-2 border-t border-b border-[#EADCC9] py-3 my-2 text-sm text-[#7A685A]">
+                            <div class="border-r border-[#EADCC9] pr-2">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Price</span>
+                                <span class="font-bold text-[#4A3B32] text-base">RM 9,800,000</span>
+                            </div>
+                            <div class="pl-4">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Type</span>
+                                <span class="font-bold text-[#4A3B32] text-base">Semi-D</span>
+                            </div>
+                        </div>
+
+                        <!-- Features List -->
+                        <div class="space-y-2.5 my-6 text-[#7A685A] text-sm flex-1">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Ample Power Supply</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Strategically located</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>High Ceiling</span>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="mt-auto pt-4 text-center">
+                            <a href="property-2.html" class="inline-block bg-[#9E8265] text-white px-10 py-3 rounded-full hover:bg-[#856C53] transition text-sm font-bold uppercase tracking-wider shadow-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="property-card flex flex-col h-full bg-[#FCF7F2] rounded-3xl overflow-hidden shadow-sm border border-[#EADCC9]">
+                    <img src="./images/property3.png" alt="Semenyih Bungalow" class="w-full h-72 object-cover">
+                    <div class="p-8 flex flex-col flex-1">
+                        <!-- Tag -->
+                        <div class="mb-4">
+                            <span class="bg-[#1A4D2E] text-white px-5 py-1.5 rounded-full text-sm font-semibold tracking-wide">For Sale</span>
+                        </div>
+                        <!-- Title -->
+                        <h3 class="text-2xl font-bold text-[#4A3B32] mb-1">1.5 Storey Semi-D</h3>
+                        <!-- Location -->
+                        <div class="flex items-center text-[#998475] text-sm mb-6">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Semenyih, Selangor
+                        </div>
+                        
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-2 border-t border-b border-[#EADCC9] py-3 my-2 text-sm text-[#7A685A]">
+                            <div class="border-r border-[#EADCC9] pr-2">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Price</span>
+                                <span class="font-bold text-[#4A3B32] text-base">RM 9,800,000</span>
+                            </div>
+                            <div class="pl-4">
+                                <span class="block text-xs text-[#BAA390] uppercase tracking-wider mb-0.5">Type</span>
+                                <span class="font-bold text-[#4A3B32] text-base">Semi-D</span>
+                            </div>
+                        </div>
+
+                        <!-- Features List -->
+                        <div class="space-y-2.5 my-6 text-[#7A685A] text-sm flex-1">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Premium Quality Materials</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Spacious Layout Plan</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#A8927E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Easy Highway Access</span>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="mt-auto pt-4 text-center">
+                            <a href="property-3.html" class="inline-block bg-[#9E8265] text-white px-10 py-3 rounded-full hover:bg-[#856C53] transition text-sm font-bold uppercase tracking-wider shadow-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
 
             <!-- For Rent -->
             <div id="rent" class="mb-20">
