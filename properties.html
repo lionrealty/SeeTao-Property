@@ -166,7 +166,7 @@
             icon.classList.toggle('fa-times');
         });
 
-        // ⚠️ 请在这里替换为您自己的 Google Sheet ID
+        // 已填入您的 Google Sheet ID
         const SHEET_ID = '18mQ3vGh4AZnju0Mptbt8ERo5yYTKt37JQkwCdTrGtsg';
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
@@ -174,6 +174,7 @@
         function renderCard(item) {
             const badgeText = (item.category || 'PROPERTY').toUpperCase();
             const linkUrl = item.link || (item.listing_row ? `property-detail${item.listing_row}.html` : '#');
+            const displayLandSize = item.land_size || item.size || 'N/A';
 
             return `
                 <div class="property-card flex flex-col h-full bg-[#F3F8FC] rounded-3xl overflow-hidden shadow-sm border border-[#DCE9F4] transition-all hover:shadow-md">
@@ -193,8 +194,8 @@
 
                         <div class="grid grid-cols-2 border-t border-b border-[#DCE9F4] py-3 my-2 text-sm text-[#475A77]">
                             <div class="border-r border-[#DCE9F4] pr-2">
-                                <span class="block text-xs text-[#8A9EB7] uppercase tracking-wider mb-0.5">Size</span>
-                                <span class="font-bold text-[#0F2256] text-sm">${item.size || 'N/A'}</span>
+                                <span class="block text-xs text-[#8A9EB7] uppercase tracking-wider mb-0.5">Land Size</span>
+                                <span class="font-bold text-[#0F2256] text-sm">${displayLandSize}</span>
                             </div>
                             <div class="pl-4">
                                 <span class="block text-xs text-[#8A9EB7] uppercase tracking-wider mb-0.5">Built Up</span>
