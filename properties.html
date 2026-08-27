@@ -248,9 +248,18 @@
                 Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
 
                 properties.forEach(item => {
-                    const cat = (item.category || '').toLowerCase().trim();
-                    if (containers[cat]) {
-                        containers[cat].innerHTML += renderCard(item);
+                    // 统一转换成小写并去除两端空格
+                    let rawCat = (item.category || '').toLowerCase().trim();
+
+                    // 映射 Dropdown 选项值到 HTML 的 Section ID
+                    let targetKey = '';
+                    if (rawCat === 'sale') targetKey = 'sale';
+                    else if (rawCat === 'rent') targetKey = 'rent';
+                    else if (rawCat === 'land') targetKey = 'land';
+                    else if (rawCat === 'new project' || rawCat === 'project' || rawCat === 'new_project') targetKey = 'project';
+
+                    if (targetKey && containers[targetKey]) {
+                        containers[targetKey].innerHTML += renderCard(item);
                     }
                 });
             })
