@@ -61,15 +61,15 @@
                 <div>
                     <h2 class="text-2xl font-semibold mb-6">Property Features</h2>
 
-                    <!-- Key Specs Grid -->
+                    <!-- Key Specs 四宫格 Grid -->
                     <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="bg-gray-50 p-5 rounded-2xl border">
-                            <p class="text-sm text-gray-500 mb-1">Title / Type</p>
-                            <p id="p-type" class="text-xl font-bold">--</p>
-                        </div>
                         <div class="bg-gray-50 p-5 rounded-2xl border">
                             <p class="text-sm text-gray-500 mb-1">Land Size</p>
                             <p id="p-land-size" class="text-xl font-bold">--</p>
+                        </div>
+                        <div class="bg-gray-50 p-5 rounded-2xl border">
+                            <p class="text-sm text-gray-500 mb-1">Built Up</p>
+                            <p id="p-built-up" class="text-xl font-bold">--</p>
                         </div>
                         <div class="bg-gray-50 p-5 rounded-2xl border">
                             <p class="text-sm text-gray-500 mb-1">Location</p>
@@ -145,7 +145,7 @@
             });
         }
 
-        // 从当前访问的网址（如 property-detail1192.html）提取房产编号 "1192"
+        // 从当前访问的网址（如 property-detail1192.html 或 ?row=2113）提取房产编号
         const path = window.location.pathname;
         const match = path.match(/property-detail([a-zA-Z0-9_-]+)\.html/);
         const urlParams = new URLSearchParams(window.location.search);
@@ -180,9 +180,9 @@
                         document.getElementById('p-image').src = data.image;
                     }
 
-                    // 动态更新 Specs 四格
-                    document.getElementById('p-type').innerText = data.type || data.built_up || 'N/A';
+                    // 动态更新 Specs 四宫格 (严格对应 Land Size, Built Up, Location, Tenure)
                     document.getElementById('p-land-size').innerText = data.land_size || data.size || 'N/A';
+                    document.getElementById('p-built-up').innerText = data.built_up || 'N/A';
                     document.getElementById('p-location').innerText = data.location || 'Selangor';
                     document.getElementById('p-tenure').innerText = data.tenure || 'Freehold';
 
@@ -205,14 +205,15 @@
                     }
 
                     // 动态渲染右侧 Description 描述列表 (desc1 ~ desc10)
-                    const descContainer = document.getElementById('p-description');
-                    descContainer.innerHTML = '';
+                    const descContainer = document.getElementById('p-[#description');
+                    const descList = document.getElementById('p-description');
+                    descList.innerHTML = '';
                     let hasDesc = false;
                     for (let i = 1; i <= 10; i++) {
                         const dKey = `desc${i}`;
                         if (data[dKey] && String(data[dKey]).trim() !== '') {
                             hasDesc = true;
-                            descContainer.innerHTML += `
+                            descList.innerHTML += `
                                 <li class="flex items-start gap-3">
                                     <span class="text-blue-600 mt-1">•</span>
                                     <span><strong>${data[dKey]}</strong></span>
@@ -220,7 +221,7 @@
                         }
                     }
                     if (!hasDesc) {
-                        descContainer.innerHTML = '<li class="text-gray-500">No description available.</li>';
+                        descList.innerHTML = '<li class="text-gray-500">No description available.</li>';
                     }
                 }
             })
