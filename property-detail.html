@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nature Surrounding Land</title>
+    <title id="page-title">Property Details - SeeTao Property</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -48,61 +48,46 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-6 py-12">
-            <!-- 静态保留的原有内容 -->
-            <h1 class="text-5xl font-bold mb-4">Nature Surrounding Land</h1>
-            <p class="text-3xl text-emerald-600 font-semibold">RM 20/sqft</p>
+            <!-- 动态渲染的核心头部与照片 -->
+            <h1 id="p-title" class="text-5xl font-bold mb-4">Loading Property...</h1>
+            <p id="p-price" class="text-3xl text-emerald-600 font-semibold">RM --</p>
 
             <div class="my-10">
-                <img src="./images/propertyl1.png" alt="Nature Surrounding Land" class="w-full rounded-3xl">
+                <img id="p-image" src="./images/propertyl1.png" alt="Property Image" class="w-full rounded-3xl object-cover max-h-[550px]">
             </div>
 
             <div class="grid md:grid-cols-2 gap-12">
-                <!-- Left Column (完全照旧保持静态) -->
+                <!-- Left Column (规格 Specs 与打勾卖点) -->
                 <div>
                     <h2 class="text-2xl font-semibold mb-6">Property Features</h2>
 
                     <!-- Key Specs Grid -->
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="bg-gray-50 p-5 rounded-2xl border">
-                            <p class="text-sm text-gray-500 mb-1">Title</p>
-                            <p class="text-xl font-bold">Agriculture Land</p>
+                            <p class="text-sm text-gray-500 mb-1">Title / Type</p>
+                            <p id="p-type" class="text-xl font-bold">--</p>
                         </div>
                         <div class="bg-gray-50 p-5 rounded-2xl border">
                             <p class="text-sm text-gray-500 mb-1">Land Size</p>
-                            <p class="text-xl font-bold">40 Acres</p>
+                            <p id="p-land-size" class="text-xl font-bold">--</p>
                         </div>
                         <div class="bg-gray-50 p-5 rounded-2xl border">
                             <p class="text-sm text-gray-500 mb-1">Location</p>
-                            <p class="text-xl font-bold">Semenyih</p>
+                            <p id="p-location" class="text-xl font-bold">--</p>
                         </div>
                         <div class="bg-gray-50 p-5 rounded-2xl border">
                             <p class="text-sm text-gray-500 mb-1">Tenure</p>
-                            <p class="text-xl font-bold">Freehold</p>
+                            <p id="p-tenure" class="text-xl font-bold">--</p>
                         </div>
                     </div>
 
-                    <!-- Other Features -->
-                    <ul class="space-y-3 text-lg">
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-600 mt-1">✓</span>
-                            <span><strong>All Scenic Hillside Views</strong></span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-600 mt-1">✓</span>
-                            <span><strong>High Investment Potential</strong></span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-600 mt-1">✓</span>
-                            <span><strong>Partially Cultivated Land</strong></span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-600 mt-1">✓</span>
-                            <span><strong>Extension Flexibility</strong></span>
-                        </li>
+                    <!-- 打勾卖点列表 (feature1 ~ feature4) -->
+                    <ul id="p-features" class="space-y-3 text-lg">
+                        <li class="text-gray-400">Loading features...</li>
                     </ul>
                 </div>
 
-                <!-- Right Column (仅此处从 Google Sheet 动态拉取替换) -->
+                <!-- Right Column (从 Google Sheet 动态拉取 desc1 到 desc10) -->
                 <div>
                     <h2 class="text-2xl font-semibold mb-6">Description</h2>
                     
@@ -111,19 +96,19 @@
                     </ul>
 
                     <button onclick="window.location.href='https://wa.me/60102269550'"
-                            class="mt-10 bg-blue-700 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-800 transition">
+                            class="mt-10 bg-blue-700 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-800 transition shadow-lg">
                         Contact Us for Viewing
                     </button>
                 </div>
             </div>
         </div>
-    </div> <!-- 这里关闭 pt-[120px] -->
+    </div>
 
     <!-- Footer -->
     <footer class="bg-[#1840B2] text-white py-16">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="text-3xl font-bold mb-4">SeeTao Property</div>
-            <p class="text-gray-400">Kampung Baru Balakong, Selangor, Malaysia</p>
+            <p class="text-gray-400">Balakong, Selangor, Malaysia</p>
             <div class="flex justify-center gap-8 mt-10 text-3xl">
                 <i class="fab fa-whatsapp hover:text-green-400 cursor-pointer" onclick="window.location.href='https://wa.me/60102269550'"></i>
                 <i class="fab fa-facebook hover:text-blue-400 cursor-pointer" onclick="window.location.href='https://www.facebook.com/seetaoproperty/'"></i>
@@ -146,12 +131,12 @@
         </a>
     </div>
 
-    <!-- 仅读取 Description 的脚本 -->
+    <!-- 动态拉取 Google Sheet 数据的脚本 -->
     <script>
         const SHEET_ID = '18mQ3vGh4AZnju0Mptbt8ERo5yYTKt37JQkwCdTrGtsg';
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-        // 移动端菜单
+        // 移动端菜单切换
         const menuBtn = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         if (menuBtn && mobileMenu) {
@@ -160,13 +145,13 @@
             });
         }
 
-        // 从网址（如 property-detail1192.html）中提取编号，默认 1192
+        // 从当前访问的网址（如 property-detail1192.html）提取房产编号 "1192"
         const path = window.location.pathname;
         const match = path.match(/property-detail([a-zA-Z0-9_-]+)\.html/);
         const urlParams = new URLSearchParams(window.location.search);
-        const targetRow = match ? match[1] : (urlParams.get('row') || '1192');
+        const targetRow = match ? match[1] : (urlParams.get('row') || '');
 
-        // 请求 Google Sheet 并只更新 Description
+        // 请求 Google Sheet 数据
         fetch(SHEET_URL)
             .then(res => res.text())
             .then(rep => {
@@ -183,33 +168,65 @@
                     return obj;
                 });
 
-                // 寻找 listing_row 匹配的这一行
+                // 寻找 A 列 (listing_row) 与当前网址编号匹配的那一行
                 const data = allProperties.find(item => String(item.listing_row).trim() === String(targetRow).trim()) || allProperties[0];
 
-                const descContainer = document.getElementById('p-description');
-                descContainer.innerHTML = '';
-
-                // 读取 desc1 到 desc10 并填充
-                let hasDesc = false;
-                for (let i = 1; i <= 10; i++) {
-                    const dKey = `desc${i}`;
-                    if (data && data[dKey] && String(data[dKey]).trim() !== '') {
-                        hasDesc = true;
-                        descContainer.innerHTML += `
-                            <li class="flex items-start gap-3">
-                                <span class="text-blue-600 mt-1">•</span>
-                                <span><strong>${data[dKey]}</strong></span>
-                            </li>`;
+                if (data) {
+                    // 动态更新页面标题、房产名、价格、图片
+                    document.getElementById('page-title').innerText = `${data.title || 'Property'} - SeeTao Property`;
+                    document.getElementById('p-title').innerText = data.title || 'Property Details';
+                    document.getElementById('p-price').innerText = data.price || 'Contact Us';
+                    if (data.image) {
+                        document.getElementById('p-image').src = data.image;
                     }
-                }
 
-                if (!hasDesc) {
-                    descContainer.innerHTML = '<li class="text-gray-500">No description available.</li>';
+                    // 动态更新 Specs 四格
+                    document.getElementById('p-type').innerText = data.type || data.built_up || 'N/A';
+                    document.getElementById('p-land-size').innerText = data.land_size || data.size || 'N/A';
+                    document.getElementById('p-location').innerText = data.location || 'Selangor';
+                    document.getElementById('p-tenure').innerText = data.tenure || 'Freehold';
+
+                    // 动态渲染打勾特点 (feature1 ~ feature4)
+                    const featuresContainer = document.getElementById('p-features');
+                    featuresContainer.innerHTML = '';
+                    let hasFeatures = false;
+                    ['feature1', 'feature2', 'feature3', 'feature4'].forEach(fKey => {
+                        if (data[fKey] && String(data[fKey]).trim() !== '') {
+                            hasFeatures = true;
+                            featuresContainer.innerHTML += `
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-600 mt-1">✓</span>
+                                    <span><strong>${data[fKey]}</strong></span>
+                                </li>`;
+                        }
+                    });
+                    if (!hasFeatures) {
+                        featuresContainer.innerHTML = '<li class="text-gray-400">No additional features listed.</li>';
+                    }
+
+                    // 动态渲染右侧 Description 描述列表 (desc1 ~ desc10)
+                    const descContainer = document.getElementById('p-description');
+                    descContainer.innerHTML = '';
+                    let hasDesc = false;
+                    for (let i = 1; i <= 10; i++) {
+                        const dKey = `desc${i}`;
+                        if (data[dKey] && String(data[dKey]).trim() !== '') {
+                            hasDesc = true;
+                            descContainer.innerHTML += `
+                                <li class="flex items-start gap-3">
+                                    <span class="text-blue-600 mt-1">•</span>
+                                    <span><strong>${data[dKey]}</strong></span>
+                                </li>`;
+                        }
+                    }
+                    if (!hasDesc) {
+                        descContainer.innerHTML = '<li class="text-gray-500">No description available.</li>';
+                    }
                 }
             })
             .catch(err => {
                 console.error(err);
-                document.getElementById('p-description').innerHTML = '<li class="text-red-500">Failed to load description.</li>';
+                document.getElementById('p-description').innerHTML = '<li class="text-red-500">Failed to load property details.</li>';
             });
     </script>
 </body>
