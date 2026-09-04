@@ -132,103 +132,111 @@
     </div>
 
     <!-- 动态拉取 Google Sheet 数据的脚本 -->
-    <script>
-        const SHEET_ID = '18mQ3vGh4AZnju0Mptbt8ERo5yYTKt37JQkwCdTrGtsg';
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+  <script>
+    const SHEET_ID = '18mQ3vGh4AZnju0Mptbt8ERo5yYTKt37JQkwCdTrGtsg';
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-        // 移动端菜单切换
-        const menuBtn = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 
-        // 从当前访问的网址（如 property-detail1192.html 或 ?row=2113）提取房产编号
-        const path = window.location.pathname;
-        const match = path.match(/property-detail([a-zA-Z0-9_-]+)\.html/);
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetRow = match ? match[1] : (urlParams.get('row') || '');
+    // 从当前访问的网址提取房产编号（如 property-detailpd61.html 或 ?row=pd61）
+    const path = window.location.pathname;
+    const match = path.match(/property-detail([a-zA-Z0-9_-]+)\.html/i);
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // 统一转成小写并去除空格，防止大小写不匹配
+    const rawTarget = match ? match[1] : (urlParams.get('row') || '');
+    const targetRow = String(rawTarget).toLowerCase().trim();
 
-        // 请求 Google Sheet 数据
-        fetch(SHEET_URL)
-            .then(res => res.text())
-            .then(rep => {
-                const json = JSON.parse(rep.substr(47).slice(0, -2));
-                const cols = json.table.cols.map(col => col.label ? col.label.toLowerCase() : '');
-                const rows = json.table.rows;
+    // 请求 Google Sheet 数据
+    fetch(SHEET_URL)
+        .then(res => res.text())
+        .then(rep => {
+            const json = JSON.parse(rep.substr(47).slice(0, -2));
+            const cols = json.table.cols.map(col => col.label ? col.label.toLowerCase().trim() : '');
+            const rows = json.table.rows;
 
-                const allProperties = rows.map(row => {
-                    let obj = {};
-                    row.c.forEach((cell, idx) => {
-                        const key = cols[idx];
-                        if (key) obj[key] = cell ? (cell.v || '') : '';
-                    });
-                    return obj;
+            const allProperties = rows.map(row => {
+                let obj = {};
+                row.c.forEach((cell, idx) => {
+                    const key = cols[idx];
+                    if (key) obj[key] = cell ? (cell.v || '') : '';
                 });
+                return obj;
+            });
 
-                // 寻找 A 列 (listing_row) 与当前网址编号匹配的那一行
-                const data = allProperties.find(item => String(item.listing_row).trim() === String(targetRow).trim()) || allProperties[0];
+            // 寻找 A 列 (listing_row) 与当前网址编号匹配的那一行 (全部不区分大小写对比)
+            let data = allProperties.find(item => String(item.listing_row).toLowerCase().trim() === targetRow);
 
-                if (data) {
-                    // 动态更新页面标题、房产名、价格、图片
-                    document.getElementById('page-title').innerText = `${data.title || 'Property'} - SeeTao Property`;
-                    document.getElementById('p-title').innerText = data.title || 'Property Details';
-                    document.getElementById('p-price').innerText = data.price || 'Contact Us';
-                    if (data.image) {
-                        document.getElementById('p-image').src = data.image;
+            // 如果没找到精确匹配的，才退而求次显示第一个
+            if (!data) {
+                console.warn(`Property with listing_row "${targetRow}" not found. Showing first property as fallback.`);
+                data = allProperties[0];
+            }
+
+            if (data) {
+                // 动态更新页面标题、房产名、价格、图片
+                document.getElementById('page-title').innerText = `${data.title || 'Property'} - SeeTao Property`;
+                document.getElementById('p-title').innerText = data.title || 'Property Details';
+                document.getElementById('p-price').innerText = data.price || 'Contact Us';
+                if (data.image) {
+                    document.getElementById('p-image').src = data.image;
+                }
+
+                // 动态更新 Specs 四宫格 (严格对应 Land Size, Built Up, Location, Tenure)
+                document.getElementById('p-land-size').innerText = data.land_size || data.size || 'N/A';
+                document.getElementById('p-built-up').innerText = data.built_up || 'N/A';
+                document.getElementById('p-location').innerText = data.location || 'Selangor';
+                document.getElementById('p-tenure').innerText = data.tenure || 'Freehold';
+
+                // 动态渲染打勾特点 (feature1 ~ feature4)
+                const featuresContainer = document.getElementById('p-features');
+                featuresContainer.innerHTML = '';
+                let hasFeatures = false;
+                ['feature1', 'feature2', 'feature3', 'feature4'].forEach(fKey => {
+                    if (data[fKey] && String(data[fKey]).trim() !== '') {
+                        hasFeatures = true;
+                        featuresContainer.innerHTML += `
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-600 mt-1">✓</span>
+                                <span><strong>${data[fKey]}</strong></span>
+                            </li>`;
                     }
+                });
+                if (!hasFeatures) {
+                    featuresContainer.innerHTML = '<li class="text-gray-400">No additional features listed.</li>';
+                }
 
-                    // 动态更新 Specs 四宫格 (严格对应 Land Size, Built Up, Location, Tenure)
-                    document.getElementById('p-land-size').innerText = data.land_size || data.size || 'N/A';
-                    document.getElementById('p-built-up').innerText = data.built_up || 'N/A';
-                    document.getElementById('p-location').innerText = data.location || 'Selangor';
-                    document.getElementById('p-tenure').innerText = data.tenure || 'Freehold';
-
-                    // 动态渲染打勾特点 (feature1 ~ feature4)
-                    const featuresContainer = document.getElementById('p-features');
-                    featuresContainer.innerHTML = '';
-                    let hasFeatures = false;
-                    ['feature1', 'feature2', 'feature3', 'feature4'].forEach(fKey => {
-                        if (data[fKey] && String(data[fKey]).trim() !== '') {
-                            hasFeatures = true;
-                            featuresContainer.innerHTML += `
-                                <li class="flex items-start gap-3">
-                                    <span class="text-green-600 mt-1">✓</span>
-                                    <span><strong>${data[fKey]}</strong></span>
-                                </li>`;
-                        }
-                    });
-                    if (!hasFeatures) {
-                        featuresContainer.innerHTML = '<li class="text-gray-400">No additional features listed.</li>';
-                    }
-
-                    // 动态渲染右侧 Description 描述列表 (desc1 ~ desc10)
-                    const descContainer = document.getElementById('p-[#description');
-                    const descList = document.getElementById('p-description');
-                    descList.innerHTML = '';
-                    let hasDesc = false;
-                    for (let i = 1; i <= 10; i++) {
-                        const dKey = `desc${i}`;
-                        if (data[dKey] && String(data[dKey]).trim() !== '') {
-                            hasDesc = true;
-                            descList.innerHTML += `
-                                <li class="flex items-start gap-3">
-                                    <span class="text-blue-600 mt-1">•</span>
-                                    <span><strong>${data[dKey]}</strong></span>
-                                </li>`;
-                        }
-                    }
-                    if (!hasDesc) {
-                        descList.innerHTML = '<li class="text-gray-500">No description available.</li>';
+                // 动态渲染右侧 Description 描述列表 (desc1 ~ desc10)
+                const descList = document.getElementById('p-description');
+                descList.innerHTML = '';
+                let hasDesc = false;
+                for (let i = 1; i <= 10; i++) {
+                    const dKey = `desc${i}`;
+                    if (data[dKey] && String(data[dKey]).trim() !== '') {
+                        hasDesc = true;
+                        descList.innerHTML += `
+                            <li class="flex items-start gap-3">
+                                <span class="text-blue-600 mt-1">•</span>
+                                <span><strong>${data[dKey]}</strong></span>
+                            </li>`;
                     }
                 }
-            })
-            .catch(err => {
-                console.error(err);
-                document.getElementById('p-description').innerHTML = '<li class="text-red-500">Failed to load property details.</li>';
-            });
-    </script>
+                if (!hasDesc) {
+                    descList.innerHTML = '<li class="text-gray-500">No description available.</li>';
+                }
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('p-description').innerHTML = '<li class="text-red-500">Failed to load property details.</li>';
+        });
+</script>
 </body>
 </html>
