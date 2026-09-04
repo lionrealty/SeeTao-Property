@@ -145,17 +145,15 @@
         });
     }
 
-    // 从网址路径准确提取编号（例如：从 property-detailpd61.html 提取出 pd61）
+    // 提取房产编号编号逻辑（同时兼容 ?row=pd61 和 property-detailpd61.html）
     function getTargetRow() {
         const urlParams = new URLSearchParams(window.location.search);
         const queryRow = urlParams.get('row');
         if (queryRow) return String(queryRow).toLowerCase().trim();
 
-        // 正确获取当前文件名（剥离前面的路径）
         const pathname = window.location.pathname;
         const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
 
-        // 如果文件名以 property-detail 开头，剥离 property-detail 和 .html
         if (filename.toLowerCase().startsWith('property-detail')) {
             let id = filename.replace(/^property-detail/i, '').replace(/\.html$/i, '');
             return id.toLowerCase().trim();
@@ -164,6 +162,7 @@
     }
 
     const targetRow = getTargetRow();
+    console.log("Current Target Row:", targetRow); // 可在浏览器 F12 控制台查看抓取到的编号
 
     // 请求 Google Sheet 数据
     fetch(SHEET_URL)
@@ -182,13 +181,12 @@
                 return obj;
             });
 
-            // 在 Google Sheet 中精确匹配 A 列 (listing_row) 不区分大小写
+            // 精确匹配 A 列 (listing_row)
             let data = allProperties.find(item => String(item.listing_row).toLowerCase().trim() === targetRow);
 
-            // 如果没匹配到，在 Console 输出警告并降级显示第1条
             if (!data) {
-                console.warn(`Property with listing_row "${targetRow}" not found. Falling back to first item.`);
-                data = allProperties[0];
+                console.warn(`Property with listing_row "${targetRow}" not found. Showing default.`);
+                data = allProperties[0]; // 如果在 Sheet 中完全找不到才退而求次显示第1个
             }
 
             if (data) {
