@@ -145,14 +145,25 @@
         });
     }
 
-    // 从当前访问的网址提取房产编号（如 property-detailpd61.html 或 ?row=pd61）
-    const path = window.location.pathname;
-    const match = path.match(/property-detail([a-zA-Z0-9_-]+)\.html/i);
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // 统一转成小写并去除空格，防止大小写不匹配
-    const rawTarget = match ? match[1] : (urlParams.get('row') || '');
-    const targetRow = String(rawTarget).toLowerCase().trim();
+    // 从网址路径准确提取编号（例如：从 property-detailpd61.html 提取出 pd61）
+    function getTargetRow() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryRow = urlParams.get('row');
+        if (queryRow) return String(queryRow).toLowerCase().trim();
+
+        // 正确获取当前文件名（剥离前面的路径）
+        const pathname = window.location.pathname;
+        const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+        // 如果文件名以 property-detail 开头，剥离 property-detail 和 .html
+        if (filename.toLowerCase().startsWith('property-detail')) {
+            let id = filename.replace(/^property-detail/i, '').replace(/\.html$/i, '');
+            return id.toLowerCase().trim();
+        }
+        return '';
+    }
+
+    const targetRow = getTargetRow();
 
     // 请求 Google Sheet 数据
     fetch(SHEET_URL)
@@ -171,12 +182,12 @@
                 return obj;
             });
 
-            // 寻找 A 列 (listing_row) 与当前网址编号匹配的那一行 (全部不区分大小写对比)
+            // 在 Google Sheet 中精确匹配 A 列 (listing_row) 不区分大小写
             let data = allProperties.find(item => String(item.listing_row).toLowerCase().trim() === targetRow);
 
-            // 如果没找到精确匹配的，才退而求次显示第一个
+            // 如果没匹配到，在 Console 输出警告并降级显示第1条
             if (!data) {
-                console.warn(`Property with listing_row "${targetRow}" not found. Showing first property as fallback.`);
+                console.warn(`Property with listing_row "${targetRow}" not found. Falling back to first item.`);
                 data = allProperties[0];
             }
 
@@ -189,7 +200,7 @@
                     document.getElementById('p-image').src = data.image;
                 }
 
-                // 动态更新 Specs 四宫格 (严格对应 Land Size, Built Up, Location, Tenure)
+                // 动态更新 Specs 四宫格 (Land Size, Built Up, Location, Tenure)
                 document.getElementById('p-land-size').innerText = data.land_size || data.size || 'N/A';
                 document.getElementById('p-built-up').innerText = data.built_up || 'N/A';
                 document.getElementById('p-location').innerText = data.location || 'Selangor';
