@@ -16,12 +16,12 @@
     
     <style>
         .hero-bg {
-    		background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), 
-                      url('./images/Main Page Factory.png');
-    		background-size: cover;
-    		background-position: center 65%;     /* 再往下移一点 */
-    		min-height: 100vh;
-		}
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), 
+                              url('./images/Main Page Factory.png');
+            background-size: cover;
+            background-position: center 65%;
+            min-height: 100vh;
+        }
         .property-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -45,171 +45,196 @@
         .nav-link:hover:after {
             width: 100%;
         }
+
+        /* 隐藏 Google Translate 默认的顶部横条与提示 */
+        .goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+        body { top: 0px !important; }
+        .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+        #google_translate_element { display: none; }
     </style>
 </head>
 <body class="font-sans text-gray-900">
 
     <!-- Navbar -->
-<nav class="bg-[#1840B2] shadow-lg fixed w-full z-50">
-    <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center h-[90px]">
-        
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center">
-            <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
-        </a>
+    <nav class="bg-[#1840B2] shadow-lg fixed w-full z-50">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center h-[90px]">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center">
+                <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
+            </a>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-10 text-lg">
-            <a href="#home" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Home</a>
-            <a href="properties.html" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Properties</a>
-            <a href="#why" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Why Us</a>
-            <a href="#contact" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Contact Us</a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-lg">
+                <a href="#home" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Home</a>
+                <a href="properties.html" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Properties</a>
+                <a href="#why" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Why Us</a>
+                <a href="#contact" class="nav-link font-medium text-white hover:text-[#F97E2B] transition">Contact Us</a>
+
+                <!-- 语言切换按钮 -->
+                <div class="flex items-center gap-2 border border-white/30 rounded-full px-3 py-1 text-sm text-white ml-2">
+                    <button onclick="changeLanguage('en')" class="hover:text-[#F97E2B] font-semibold">EN</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('zh-CN')" class="hover:text-[#F97E2B] font-semibold">中文</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('ms')" class="hover:text-[#F97E2B] font-semibold">BM</button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-button" class="md:hidden text-white text-3xl focus:outline-none">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1840B2] border-t border-blue-800 py-6">
+            <div class="px-6 flex flex-col gap-6 text-lg">
+                <a href="#home" class="text-white hover:text-[#F97E2B] transition">Home</a>
+                <a href="properties.html" class="text-white hover:text-[#F97E2B] transition">Properties</a>
+                <a href="#why" class="text-white hover:text-[#F97E2B] transition">Why Us</a>
+                <a href="#contact" class="text-white hover:text-[#F97E2B] transition">Contact Us</a>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-[#1840B2] border-t border-blue-800 py-6">
-        <div class="px-6 flex flex-col gap-6 text-lg">
-            <a href="#home" class="text-white hover:text-[#F97E2B] transition">Home</a>
-            <a href="properties.html" class="text-white hover:text-[#F97E2B] transition">Properties</a>
-            <a href="#why" class="text-white hover:text-[#F97E2B] transition">Why Us</a>
-            <a href="#contact" class="text-white hover:text-[#F97E2B] transition">Contact Us</a>
+                <!-- Mobile 语言切换 -->
+                <div class="flex items-center gap-4 text-white text-base pt-2 border-t border-blue-700">
+                    <button onclick="changeLanguage('en')" class="hover:text-[#F97E2B] font-semibold">English</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('zh-CN')" class="hover:text-[#F97E2B] font-semibold">中文</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('ms')" class="hover:text-[#F97E2B] font-semibold">BM</button>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
-<section id="home" class="hero-bg h-screen flex items-center text-white">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-        
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-4">
-            We focus on
-        </h1>
-        <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-4">
-            Industrial, Commercial & Land
-        </h2>
-        <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-10">
-            in Balakong, Cheras & Semenyih
-        </h3>
-
-        <p class="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-12">
-            Precision matching for factories, shoplots, land, and exclusive new projects. 
-            We deliver tailored, one-stop real estate solutions to power your business growth.
-        </p>
-
-        <div class="flex flex-wrap gap-4 justify-center">
-            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})"
-                    class="bg-white text-blue-950 px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-gray-100 transition">
-                Chat With Us
-            </button>
-            <button onclick="document.getElementById('properties').scrollIntoView({behavior: 'smooth'})"
-                    class="border-2 border-white px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-white hover:text-blue-950 transition">
-                Featured Properties
-            </button>
-        </div>
-    </div>
-</section>
-   <!-- Why Us - 4 Cards -->
-<section id="why" class="py-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gray-900">Why Choose Us</h2>
-            <p class="text-xl text-gray-600 mt-4">Professional, reliable, and experienced real estate services in Malaysia</p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section id="home" class="hero-bg h-screen flex items-center text-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
             
-            <!-- Card 1 -->
-            <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
-                <div class="text-6xl mb-6">🗺️</div>
-                <h3 class="text-2xl font-semibold mb-4"> Local Market Experts</h3>
-                <p class="text-gray-600">Focusing on Balakong, Cheras & Semenyih. We know the local industrial zones and transport networks inside out to find you the best location. </p>
-            </div>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-4">
+                We focus on
+            </h1>
+            <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-4">
+                Industrial, Commercial & Land
+            </h2>
+            <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-10">
+                in Balakong, Cheras & Semenyih
+            </h3>
 
-            <!-- Card 2 -->
-            <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
-                <div class="text-6xl mb-6">🏭</div>
-                <h3 class="text-2xl font-semibold mb-4">Wide Range of Properties</h3>
-                <p class="text-gray-600">From factories and shoplots to land and brand-new projects. Whether for your own business use or investment, we have you covered.</p>
-            </div>
+            <p class="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-12">
+                Precision matching for factories, shoplots, land, and exclusive new projects. 
+                We deliver tailored, one-stop real estate solutions to power your business growth.
+            </p>
 
-            <!-- Card 3 -->
-            <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
-                <div class="text-6xl mb-6">⚡🔍</div>
-                <h3 class="text-2xl font-semibold mb-4">Fast & Accurate Matching</h3>
-                <p class="text-gray-600">Backed by a massive database. We match the right buyers, tenants, or properties quickly, saving you precious time.</p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})"
+                        class="bg-white text-blue-950 px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-gray-100 transition">
+                    Chat With Us
+                </button>
+                <button onclick="window.location.href='properties.html'"
+                        class="border-2 border-white px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-white hover:text-blue-950 transition">
+                    Featured Properties
+                </button>
             </div>
-
-            <!-- Card 4 -->
-            <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
-                <div class="text-6xl mb-6">📑</div>
-                <h3 class="text-2xl font-semibold mb-4">One-Stop Support</h3>
-                <p class="text-gray-600">From property hunting and negotiation to loans and legal work. Our expert team handles it all to ensure a safe, hassle-free transaction. </p>
-            </div>
-
         </div>
-    </div>
-</section>
-	
-   <!-- Featured Properties with Image Hover Overlay -->
-<section id="properties" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center mb-16">Featured Properties</h2>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    </section>
+
+    <!-- Why Us - 4 Cards -->
+    <section id="why" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-900">Why Choose Us</h2>
+                <p class="text-xl text-gray-600 mt-4">Professional, reliable, and experienced real estate services in Malaysia</p>
+            </div>
             
-            <!-- For Sale -->
-            <a href="properties.html#sale" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
-                <img src="./images/OIP.jpg" alt="For Sale" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                    <div class="text-5xl mb-4">🏷️</div>
-                    <h3 class="text-3xl font-bold mb-2">For Sale</h3>
-                    <p class="opacity-80 group-hover:opacity-100 transition-opacity">Ready to move in properties</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
+                    <div class="text-6xl mb-6">🗺️</div>
+                    <h3 class="text-2xl font-semibold mb-4"> Local Market Experts</h3>
+                    <p class="text-gray-600">Focusing on Balakong, Cheras & Semenyih. We know the local industrial zones and transport networks inside out to find you the best location. </p>
                 </div>
-            </a>
 
-            <!-- For Rent -->
-            <a href="properties.html#rent" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
-                <img src="./images/propertym3.jpg" alt="For Rent" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                    <div class="text-5xl mb-4">🔑</div>
-                    <h3 class="text-3xl font-bold mb-2">For Rent</h3>
-                    <p class="opacity-80 group-hover:opacity-100 transition-opacity">Rental properties</p>
+                <!-- Card 2 -->
+                <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
+                    <div class="text-6xl mb-6">🏭</div>
+                    <h3 class="text-2xl font-semibold mb-4">Wide Range of Properties</h3>
+                    <p class="text-gray-600">From factories and shoplots to land and brand-new projects. Whether for your own business use or investment, we have you covered.</p>
                 </div>
-            </a>
 
-            <!-- New Projects -->
-            <a href="properties.html#project" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
-                <img src="./images/propertym2.png" alt="New Projects" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                    <div class="text-5xl mb-4">🏗️</div>
-                    <h3 class="text-3xl font-bold mb-2">New Projects</h3>
-                    <p class="opacity-80 group-hover:opacity-100 transition-opacity">Brand new property</p>
+                <!-- Card 3 -->
+                <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
+                    <div class="text-6xl mb-6">⚡🔍</div>
+                    <h3 class="text-2xl font-semibold mb-4">Fast & Accurate Matching</h3>
+                    <p class="text-gray-600">Backed by a massive database. We match the right buyers, tenants, or properties quickly, saving you precious time.</p>
                 </div>
-            </a>
 
-            <!-- Land -->
-            <a href="properties.html#land" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
-                <img src="https://picsum.photos/id/251/800/600" alt="Land" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                    <div class="text-5xl mb-4">🌳</div>
-                    <h3 class="text-3xl font-bold mb-2">Land</h3>
-                    <p class="opacity-80 group-hover:opacity-100 transition-opacity">Land for development</p>
+                <!-- Card 4 -->
+                <div class="bg-white p-10 rounded-3xl shadow text-center hover:shadow-xl transition">
+                    <div class="text-6xl mb-6">📑</div>
+                    <h3 class="text-2xl font-semibold mb-4">One-Stop Support</h3>
+                    <p class="text-gray-600">From property hunting and negotiation to loans and legal work. Our expert team handles it all to ensure a safe, hassle-free transaction. </p>
                 </div>
-            </a>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+        
+    <!-- Featured Properties with Image Hover Overlay -->
+    <section id="properties" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16">Featured Properties</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- For Sale -->
+                <a href="properties.html#sale" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
+                    <img src="./images/OIP.jpg" alt="For Sale" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <div class="text-5xl mb-4">🏷️</div>
+                        <h3 class="text-3xl font-bold mb-2">For Sale</h3>
+                        <p class="opacity-80 group-hover:opacity-100 transition-opacity">Ready to move in properties</p>
+                    </div>
+                </a>
+
+                <!-- For Rent -->
+                <a href="properties.html#rent" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
+                    <img src="./images/propertym3.jpg" alt="For Rent" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <div class="text-5xl mb-4">🔑</div>
+                        <h3 class="text-3xl font-bold mb-2">For Rent</h3>
+                        <p class="opacity-80 group-hover:opacity-100 transition-opacity">Rental properties</p>
+                    </div>
+                </a>
+
+                <!-- New Projects -->
+                <a href="properties.html#project" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
+                    <img src="./images/propertym2.png" alt="New Projects" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <div class="text-5xl mb-4">🏗️</div>
+                        <h3 class="text-3xl font-bold mb-2">New Projects</h3>
+                        <p class="opacity-80 group-hover:opacity-100 transition-opacity">Brand new property</p>
+                    </div>
+                </a>
+
+                <!-- Land -->
+                <a href="properties.html#land" class="group relative overflow-hidden rounded-3xl h-[400px] shadow-lg">
+                    <img src="https://picsum.photos/id/251/800/600" alt="Land" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent transition-all duration-300 group-hover:from-black/85"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <div class="text-5xl mb-4">🌳</div>
+                        <h3 class="text-3xl font-bold mb-2">Land</h3>
+                        <p class="opacity-80 group-hover:opacity-100 transition-opacity">Land for development</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Form -->
     <section id="contact" class="py-24 bg-gray-50">
@@ -220,52 +245,52 @@
             </div>
             <form id="contactForm" class="bg-white p-12 rounded-3xl shadow-2xl">
                 <div class="grid md:grid-cols-2 gap-8">
-        <!-- Name -->
-        <div>
-            <label class="block text-sm font-medium mb-2">Name</label>
-            <input type="text" id="name" required 
-                   class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
-                   placeholder="John Smith">
-        </div>
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Name</label>
+                        <input type="text" id="name" required 
+                               class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
+                               placeholder="John Smith">
+                    </div>
 
-        <!-- Contact Number -->
-        <div>
-            <label class="block text-sm font-medium mb-2">Contact Number</label>
-            <input type="tel" id="phone" required 
-                   class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
-                   placeholder="+60 12-345 6789">
-        </div>
+                    <!-- Contact Number -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Contact Number</label>
+                        <input type="tel" id="phone" required 
+                               class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
+                               placeholder="+60 12-345 6789">
+                    </div>
 
-        <!-- Email -->
-        <div>
-            <label class="block text-sm font-medium mb-2">Email</label>
-            <input type="email" id="email" required 
-                   class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
-                   placeholder="your@email.com">
-        </div>
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" required 
+                               class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600" 
+                               placeholder="your@email.com">
+                    </div>
 
-        <!-- I'm Interested In -->
-        <div>
-            <label class="block text-sm font-medium mb-2">I'm Interested In</label>
-            <select id="interest" required 
-                    class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600">
-                <option value="">Please Select...</option>
-                <option value="Buying A Property">Buying A Property</option>
-                <option value="Renting A Property">Renting A Property</option>
-                <option value="Property Investment">Property Investment</option>
-                <option value="Selling My Property">Selling My Property</option>
-                <option value="Others">Others</option>
-            </select>
-        </div>
-    </div>
+                    <!-- I'm Interested In -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">I'm Interested In</label>
+                        <select id="interest" required 
+                                class="w-full border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600">
+                            <option value="">Please Select...</option>
+                            <option value="Buying A Property">Buying A Property</option>
+                            <option value="Renting A Property">Renting A Property</option>
+                            <option value="Property Investment">Property Investment</option>
+                            <option value="Selling My Property">Selling My Property</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
 
-    <!-- Optional Message -->
-    <div class="mt-8">
-        <label class="block text-sm font-medium mb-2">Message (Optional)</label>
-        <textarea id="message" rows="4"
-                  class="w-full border border-gray-300 rounded-3xl px-6 py-4 focus:outline-none focus:border-blue-600"
-                  placeholder="Please tell us more details..."></textarea>
-    </div>
+                <!-- Optional Message -->
+                <div class="mt-8">
+                    <label class="block text-sm font-medium mb-2">Message (Optional)</label>
+                    <textarea id="message" rows="4"
+                              class="w-full border border-gray-300 rounded-3xl px-6 py-4 focus:outline-none focus:border-blue-600"
+                              placeholder="Please tell us more details..."></textarea>
+                </div>
                 <button type="submit" 
                         class="mt-12 w-full bg-blue-700 text-white py-6 rounded-3xl text-xl font-semibold hover:bg-blue-800 transition">
                     Send Message
@@ -280,113 +305,133 @@
             <div class="text-3xl font-bold mb-4">SeeTao Property</div>
             <p class="text-gray-400">Balakong, Selangor, Malaysia</p>
             <div class="flex justify-center gap-10 mt-10 items-center">
-    <!-- WhatsApp -->
-    <a href="https://wa.me/60102269550" target="_blank" 
-       class="text-3xl hover:text-green-400 transition-colors">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/seetaoproperty/" target="_blank" 
-       class="text-3xl hover:text-blue-400 transition-colors">
-        <i class="fab fa-facebook"></i>
-    </a>
-    
-    <!-- iProperty Logo -->
-    <a href="https://www.iproperty.com.my/property-agent/michelle-teoh-8530/#Agent-RightSideProfile" 
-       target="_blank" class="flex items-center">
-        <img src="./images/iproperty-logo.png" 
-             alt="iProperty Logo" 
-             class="h-11 w-auto hover:opacity-80 transition-opacity">
-    </a>
-</div>
-            <p class="text-gray-500 mt-12">Copyright © 2026 SeeTao Property. All rights reserved. 
-</p>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/60102269550" target="_blank" 
+                   class="text-3xl hover:text-green-400 transition-colors">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/seetaoproperty/" target="_blank" 
+                   class="text-3xl hover:text-blue-400 transition-colors">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                
+                <!-- iProperty Logo -->
+                <a href="https://www.iproperty.com.my/property-agent/michelle-teoh-8530/#Agent-RightSideProfile" 
+                   target="_blank" class="flex items-center">
+                    <img src="./images/iproperty-logo.png" 
+                         alt="iProperty Logo" 
+                         class="h-11 w-auto hover:opacity-80 transition-opacity">
+                </a>
+            </div>
+            <p class="text-gray-500 mt-12">Copyright © 2026 SeeTao Property. All rights reserved.</p>
         </div>
     </footer>
-	
-<!-- WhatsApp Floating Bubble -->
-<div class="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-4">
-    <div class="bg-green-500 text-white px-6 py-4 rounded-3xl shadow-xl max-w-[280px] text-base font-bold leading-snug">
-        For More Enquiry Contact Us Now!!!
+    
+    <!-- WhatsApp Floating Bubble -->
+    <div class="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-4">
+        <div class="bg-green-500 text-white px-6 py-4 rounded-3xl shadow-xl max-w-[280px] text-base font-bold leading-snug">
+            For More Enquiry Contact Us Now!!!
+        </div>
+
+        <a href="https://wa.me/60102269550" target="_blank" rel="noopener noreferrer"
+           class="flex items-center justify-center w-20 h-20 bg-green-500 text-white rounded-full shadow-xl hover:bg-green-600 transition-all duration-300 animate-pulse">
+            <i class="fab fa-whatsapp text-5xl"></i>
+        </a>
     </div>
 
-    <a href="https://wa.me/60102269550" target="_blank" rel="noopener noreferrer"
-       class="flex items-center justify-center w-20 h-20 bg-green-500 text-white rounded-full shadow-xl hover:bg-green-600 transition-all duration-300 animate-pulse">
-        <i class="fab fa-whatsapp text-5xl"></i>
-    </a>
-</div>
-	
-   <script>
-	   
-    document.addEventListener('DOMContentLoaded', function() {
-        // Mobile Menu Toggle
-    const menuBtn = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+    <!-- 挂载 Google 翻译的核心挂载点 -->
+    <div id="google_translate_element"></div>
 
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-            
-            const icon = menuBtn.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    const icon = menuBtn.querySelector('i');
+                    if (icon.classList.contains('fa-bars')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // WhatsApp Form
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const name     = document.getElementById('name').value.trim();
+                    const phone    = document.getElementById('phone').value.trim();
+                    const email    = document.getElementById('email').value.trim();
+                    const interest = document.getElementById('interest').value;
+                    const message  = document.getElementById('message').value.trim();
+
+                    if (!name || !phone || !interest) {
+                        alert("Please fill in Name, Contact Number and Interest.");
+                        return;
+                    }
+
+                    let text = "*New Property Enquiry from SeeTao Property Website*%0A%0A";
+                    text += `*Name:* ${encodeURIComponent(name)}%0A`;
+                    text += `*Contact:* ${encodeURIComponent(phone)}%0A`;
+                    text += `*Email:* ${email ? encodeURIComponent(email) : 'Not provided'}%0A`;
+                    text += `*Interested In:* ${encodeURIComponent(interest)}%0A%0A`;
+
+                    if (message) {
+                        text += `*Message:* %0A${encodeURIComponent(message)}`;
+                    }
+
+                    const whatsappNumber = "60102269550";   // 已同步为您的 WhatsApp 号码
+
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
+                    window.open(whatsappURL, '_blank');
+
+                    form.reset();
+                });
             }
         });
-    }
-        // Smooth scrolling (保持不变)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
 
-        // WhatsApp Form
-        const form = document.getElementById('contactForm');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const name     = document.getElementById('name').value.trim();
-                const phone    = document.getElementById('phone').value.trim();
-                const email    = document.getElementById('email').value.trim();
-                const interest = document.getElementById('interest').value;
-                const message  = document.getElementById('message').value.trim();
-
-                if (!name || !phone || !interest) {
-                    alert("Please fill in Name, Contact Number and Interest.");
-                    return;
-                }
-
-                // 优化后的消息格式（解决 emoji 显示问题）
-                let text = "*New Property Enquiry from SeeTao Property Website*%0A%0A";
-                text += `*Name:* ${encodeURIComponent(name)}%0A`;
-                text += `*Contact:* ${encodeURIComponent(phone)}%0A`;
-                text += `*Email:* ${email ? encodeURIComponent(email) : 'Not provided'}%0A`;
-                text += `*Interested In:* ${encodeURIComponent(interest)}%0A%0A`;
-
-                if (message) {
-                    text += `*Message:* %0A${encodeURIComponent(message)}`;
-                }
-
-                const whatsappNumber = "60123763002";   // 改成你的号码
-
-                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
-                window.open(whatsappURL, '_blank');
-
-                form.reset();
-                // alert('Thank you! Opening WhatsApp...');   // 可以注释掉这个
-            });
+        // 多语言切换功能初始化
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,zh-CN,ms',
+                autoDisplay: false
+            }, 'google_translate_element');
         }
-    });
-</script>
+
+        function changeLanguage(langCode) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+
+    <!-- 异步加载 Google 翻译组件 SDK -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
