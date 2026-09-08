@@ -21,6 +21,12 @@
             content: ''; position: absolute; left: 0; top: 12px;
             width: 6px; height: 36px; background: #1840B2; border-radius: 999px;
         }
+
+        /* 隐藏 Google Translate 默认的顶部横条与提示 */
+        .goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+        body { top: 0px !important; }
+        .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+        #google_translate_element { display: none; }
     </style>
 </head>
 <body class="font-sans text-gray-900 bg-gray-50">
@@ -32,24 +38,45 @@
                 <img src="./images/logo.jpg" alt="SeeTao Logo" class="h-[70px] w-auto">
             </a>
 
-            <div class="hidden md:flex items-center gap-10 text-lg">
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-lg">
                 <a href="index.html" class="font-medium text-white hover:text-[#F97E2B]">Home</a>
                 <a href="properties.html" class="font-medium text-white hover:text-[#F97E2B]">Properties</a>
                 <a href="index.html#why" class="font-medium text-white hover:text-[#F97E2B]">Why Us</a>
                 <a href="index.html#contact" class="font-medium text-white hover:text-[#F97E2B]">Contact Us</a>
+
+                <!-- 语言切换按钮 -->
+                <div class="flex items-center gap-2 border border-white/30 rounded-full px-3 py-1 text-sm text-white ml-2">
+                    <button onclick="changeLanguage('en')" class="hover:text-[#F97E2B] font-semibold">EN</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('zh-CN')" class="hover:text-[#F97E2B] font-semibold">中文</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('ms')" class="hover:text-[#F97E2B] font-semibold">BM</button>
+                </div>
             </div>
 
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-white text-3xl">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-[#1840B2] border-t border-blue-800 py-6">
             <div class="px-6 flex flex-col gap-6 text-lg">
                 <a href="index.html" class="text-white">Home</a>
                 <a href="properties.html" class="text-white">Properties</a>
                 <a href="index.html#why" class="text-white">Why Us</a>
                 <a href="index.html#contact" class="text-white">Contact Us</a>
+
+                <!-- Mobile 语言切换 -->
+                <div class="flex items-center gap-4 text-white text-base pt-2 border-t border-blue-700">
+                    <button onclick="changeLanguage('en')" class="hover:text-[#F97E2B] font-semibold">English</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('zh-CN')" class="hover:text-[#F97E2B] font-semibold">中文</button>
+                    <span>|</span>
+                    <button onclick="changeLanguage('ms')" class="hover:text-[#F97E2B] font-semibold">BM</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -154,7 +181,10 @@
         </a>
     </div>
 
-    <!-- Script to Fetch and Render Google Sheet Data -->
+    <!-- Google 翻译的核心挂载点 -->
+    <div id="google_translate_element"></div>
+
+    <!-- Script to Fetch and Render Google Sheet Data & Translation -->
     <script>
         // 移动端菜单切换逻辑
         const menuBtn = document.getElementById('mobile-menu-button');
@@ -166,14 +196,14 @@
             icon.classList.toggle('fa-times');
         });
 
-        // 已填入您的 Google Sheet ID
+        // Google Sheet ID
         const SHEET_ID = '18mQ3vGh4AZnju0Mptbt8ERo5yYTKt37JQkwCdTrGtsg';
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
         // 生成房产卡片 HTML 模版
         function renderCard(item) {
             const badgeText = (item.category || 'PROPERTY').toUpperCase();
-            const linkUrl = item.link || (item.listing_row ? `property-detail${item.listing_row}.html` : '#');
+            const linkUrl = item.link || (item.listing_row ? `property-detail.html?row=${item.listing_row}` : '#');
             const displayLandSize = item.land_size || item.size || 'N/A';
 
             return `
@@ -196,8 +226,8 @@
                             <div class="border-r border-[#DCE9F4] pr-2">
                                 <span class="block text-xs text-[#8A9EB7] uppercase tracking-wider mb-0.5">Land Size</span>
                                 <span class="font-bold text-[#0F2256] text-sm block leading-tight whitespace-pre-line">
-                                ${displayLandSize.replace(' to ', ' to<br>')}
-                            </span>
+                                    ${displayLandSize.replace(' to ', ' to<br>')}
+                                </span>
                             </div>
                             <div class="pl-4">
                                 <span class="block text-xs text-[#8A9EB7] uppercase tracking-wider mb-0.5">Built Up</span>
@@ -252,10 +282,8 @@
                 Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
 
                 properties.forEach(item => {
-                    // 统一转换成小写并去除两端空格
                     let rawCat = (item.category || '').toLowerCase().trim();
 
-                    // 映射 Dropdown 选项值到 HTML 的 Section ID
                     let targetKey = '';
                     if (rawCat === 'sale') targetKey = 'sale';
                     else if (rawCat === 'rent') targetKey = 'rent';
@@ -268,6 +296,26 @@
                 });
             })
             .catch(err => console.error('Failed to fetch Google Sheet data:', err));
+
+        // 多语言切换功能初始化
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,zh-CN,ms',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
     </script>
+
+    <!-- 加载 Google 翻译组件 SDK -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
